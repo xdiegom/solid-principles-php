@@ -1,0 +1,15 @@
+{
+  "name": "diegomelgar/single-responsibility",
+  "authors": [
+    {
+      "name": "Diego Melgar",
+      "email": "diego.melgar.sv@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SOLID\\": "src/"
+    }
+  },
+  "require": {}
+}
