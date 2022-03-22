@@ -1,5 +1,7 @@
 <?php
 
+use SOLID\InterfaceSegregation\ReadUserRepository;
+use SOLID\InterfaceSegregation\WriteUserRepository;
 use SOLID\LiskovSubstitution\BankingService;
 use SOLID\LiskovSubstitution\CurrentAccount;
 use SOLID\LiskovSubstitution\FixedTermAccount;
@@ -54,6 +56,8 @@ echo $checkout->begin(100, new StripePaymentMethod()) . "\n";
 echo $checkout->begin(100, new PaypalPaymentMethod()) . "\n";
 
 /*
+ Liskov Substitution Principle:
+
  Any implementation of an abstraction or interface should be substitutable
  anywhere that the abstraction is accepted.
 
@@ -106,3 +110,35 @@ echo $bankingService->deposit(100) . "\n";
 $bankingService = new BankingService(new FixedTermAccount());
 $bankingService->deposit(100) . "\n";
 */
+
+/*
+ Interface Segregation:
+
+ A client should not be forced to implement an
+ interface that it doesn't use.
+
+ E.g: Let say that an interface of a repository can do
+ many things: create, read, update, delete, all, show.
+
+ But this interface has too many methods* that might not be necessary to
+ use in order to be implemented in some repository class.
+
+ What if we want to separate the repository logic with a repository that only
+ writes and then another repository that only reads from the database?
+ Here is where this principle comes into play.
+
+ * interfaces that defines a lots of methods that might not be used in some classes
+ are called "fat interfaces".
+
+*/
+
+echo "\n\nInterface Segregation: \n";
+
+$userRepository = new WriteUserRepository();
+echo $userRepository->create([
+    'name' => 'Diego',
+    'email' => 'diego@example.com'
+]) . "\n";
+
+$readUserRepository = new ReadUserRepository();
+echo $readUserRepository->all() . "\n";
