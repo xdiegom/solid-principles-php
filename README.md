@@ -20,3 +20,5 @@ Examples or comments are in index.php file. Might move it to README.md file.
 ```shell
 > php index.php
 ```
+
+> ℹ️  if by executing "index.php" throws error such as "File not found", try run `composer dump-autoload`.
