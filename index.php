@@ -66,11 +66,18 @@ echo $checkout->begin(100, new PaypalPaymentMethod()) . "\n";
 
  Covariance and Contravariance:
 
- - Covariance: any method of a class can be widen but not narrowed on its
-               return types.
+ - Covariance: allows a child class method to declare a return type that is a
+               sub-type of the parent methods return type.
+               - If Parent class return types are: int,string,array
+               - Any Sub-class that inherits the Parent class may return any of
+               the return types from one to the three but no a type that is not
+               defined on the Parent Class.
 
- - Contravariance: any method of a class can't be narrowed on its
-                   arguments.
+ - Contravariance: any method of a sub-class's parameters may increase
+                   its range of parameters, but it must accept all parameters the parent accepts.
+                   - If Parent class parameters types are: int,string,array
+                   - Any Sub-class that inherits the Parent class should accept the same
+                   parameters types and add more if its necessary.
 
  Checks in order to adhere to the Liskov substitution:
  1. Signature must match
