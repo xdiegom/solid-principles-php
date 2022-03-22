@@ -1,5 +1,8 @@
 <?php
 
+use SOLID\DependencyInversion\MailChimp;
+use SOLID\DependencyInversion\OrderService;
+use SOLID\DependencyInversion\SendGrid;
 use SOLID\InterfaceSegregation\ReadUserRepository;
 use SOLID\InterfaceSegregation\WriteUserRepository;
 use SOLID\LiskovSubstitution\BankingService;
@@ -142,3 +145,33 @@ echo $userRepository->create([
 
 $readUserRepository = new ReadUserRepository();
 echo $readUserRepository->all() . "\n";
+
+/*
+  Dependency Inversion:
+
+  Depend on abstractions, not on concretions.
+
+  It all about decoupling code.
+
+  High level code: Code that isn't concerned about the specifics
+  of the application.
+
+  Low level code: it is concerned with details and specifics of the
+  application.
+
+  Dependency Inversion != Dependency Injection.
+
+  The core idea behind this principle:
+
+  The High level code should never depend upon a low level code. It
+  should depend upon an abstraction that low level code depends
+  upon that same abstraction.
+
+ */
+
+echo "\n\nDependency Inversion: \n";
+
+$orderService = new OrderService(new SendGrid());
+echo $orderService->create() . "\n";
+$orderService = new OrderService(new MailChimp());
+echo $orderService->create() . "\n";
